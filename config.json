@@ -1,0 +1,29 @@
+{
+  "name": "Igor Weiss",
+  "job": "Desenvolvedor front-end",
+  "github": "igorweisss",
+  "playlists": {
+    "jogos": [
+      {
+        "id": "1",
+        "title": "Jogo",
+        "url": "https://github.com/igorweisss",
+        "thumb": "https://github.com/igorweisss.png"
+      },
+      {
+        "id": "2",
+        "title": "Jogo 2",
+        "url": "https://github.com/igorweisss",
+        "thumb": "https://github.com/igorweisss.png"
+      }
+    ],
+    "front-end": [
+      {
+        "id": "3",
+        "title": "Front",
+        "url": "https://github.com/igorweisss",
+        "thumb": "https://github.com/igorweisss.png"
+      }
+    ]
+  }
+}
