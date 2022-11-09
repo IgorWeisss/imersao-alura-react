@@ -1,6 +1,6 @@
 import { Header } from "../components/Header";
 import { Menu } from "../components/Menu";
-import { Timeline } from "../components/TimeLine/Timeline";
+import { Timeline } from "../components/TimeLine";
 import config from '../../config.json'
 import { Favorites } from "../components/Favorites";
 

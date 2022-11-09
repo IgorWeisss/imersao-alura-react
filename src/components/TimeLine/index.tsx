@@ -1,4 +1,4 @@
-import { VideoCard } from "./VideoCard"
+import { VideoCard } from "./components/VideoCard"
 
 interface VideosProps {
   title: string,
