@@ -1,5 +1,9 @@
+import { Logo } from "./Logo";
+
 export function Menu () {
   return (
-    <h1 className="">Menu</h1>
+    <div className="flex w-full h-14 px-4 fixed bg-backgroundLevel1">
+      <Logo />
+    </div>
   )
 }
