@@ -7,11 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        backgroundBase: "#F9F9F9",
-        backgroundLevel1: "#FFFFFF",
-        backgroundLevel2: "#F0F0F0",
-        borderBase: "#E5E5E5",
-        textColorBase: "#222222"
+        backgroundBase: "var(--backgroundBase)",
+        backgroundLevel1: "var(--backgroundLevel1)",
+        backgroundLevel2: "var(--backgroundLevel2)",
+        borderBase: "var(--borderBase)",
+        textColorBase: "var(--textColorBase)",
+        themeSwitcherBackground: "#333333",
+        themeSwitcherThumb: "#FAFAFA",
       },
       fontFamily: {
         sans: "Helvetica"

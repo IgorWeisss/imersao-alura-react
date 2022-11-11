@@ -1,5 +1,3 @@
-import config from '../../config.json'
-
 interface Favorite {
   name: string
   url: string
@@ -12,8 +10,8 @@ interface FavoritesProps {
 
 export function Favorites ({ favorites }:FavoritesProps) {
   return (
-      <div className='px-4 py-4 md:py-8'>
-        <h3 className='font-bold text-base mb-4'>Favoritos</h3>
+      <div className='px-4 py-4 md:py-8 bg-backgroundBase'>
+        <h3 className='font-bold text-base mb-4 text-textColorBase'>Favoritos</h3>
         <ul className='grid grid-cols-3 sm:grid-cols-4 justify-center md:flex md:flex-wrap md:justify-start self-center gap-2'>
           {favorites.map((fav) => {
             return (
@@ -24,7 +22,7 @@ export function Favorites ({ favorites }:FavoritesProps) {
                     alt={`Canal ${fav.name}`}
                     className="rounded-full w-14 md:w-[5rem]"
                   />
-                  <p>
+                  <p className="text-textColorBase">
                     {fav.name}
                   </p>
                 </a>

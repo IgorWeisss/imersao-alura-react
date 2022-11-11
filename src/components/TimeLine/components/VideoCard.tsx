@@ -13,7 +13,7 @@ export function VideoCard({ thumb, title, url }: VideoCardProps) {
           src={thumb} 
           alt="Thumbnail" 
         />
-        <p className="text-base font-normal">
+        <p className="text-base text-textColorBase font-normal">
           {title}
         </p>
       </a>
