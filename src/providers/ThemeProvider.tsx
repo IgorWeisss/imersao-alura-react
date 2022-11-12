@@ -2,6 +2,7 @@ import { createContext, useState } from "react"
 
 interface ChildrenProps {
   children: JSX.Element
+  initialMode: string
 }
 
 export const ThemeContext = createContext({
@@ -9,20 +10,17 @@ export const ThemeContext = createContext({
   toggleMode: () => {console.log("AUEHUAHE")}
 })
 
-export function ThemeProvider({children}:ChildrenProps) {
+export function ThemeProvider({children, initialMode}:ChildrenProps) {
   
-  const [theme, setTheme] = useState('dark')
+  const [theme, setTheme] = useState(initialMode)
 
   const toggleMode = function () {
-    console.log("Ativou Toggle")    
     theme === "" ? setTheme('dark') : setTheme('')
   }
   
   return (
-    <ThemeContext.Provider value={{mode: "", toggleMode: toggleMode}}>
-      <div className={theme}>
+    <ThemeContext.Provider value={{mode: theme, toggleMode: toggleMode}}>
         {children}
-      </div>
     </ThemeContext.Provider>
   )
 }
