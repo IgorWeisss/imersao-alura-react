@@ -4,20 +4,6 @@ import { useContext, useEffect } from 'react'
 import { ThemeContext, ThemeProvider } from '../providers/ThemeProvider'
 import '../styles/main.css'
 
-export function ProviderWrapper (props:any) {  
-  return (
-    <>
-      <Head>
-        <title>AluraTube</title>
-        <meta id='themeTag' name="theme-color" content=''></meta>
-      </Head>
-      <ThemeProvider initialMode='dark'>
-        {props.children}
-      </ThemeProvider>
-    </>
-  )
-}
-
 function App({ Component, pageProps }: AppProps) {  
 
   const context = useContext(ThemeContext)
@@ -37,10 +23,18 @@ function App({ Component, pageProps }: AppProps) {
   )
 }
 
-export default function _app (props:any) {
+function ProviderWrapper (props:any) {
   return (
-    <ProviderWrapper>
-      <App {...props}/>
-    </ProviderWrapper>
+    <>
+      <Head>
+        <title>AluraTube</title>
+        <meta id='themeTag' name="theme-color" content=''></meta>
+      </Head>
+      <ThemeProvider initialMode='dark'>
+        <App {...props}/>
+      </ThemeProvider>
+    </>
   )
 }
+
+export default ProviderWrapper
