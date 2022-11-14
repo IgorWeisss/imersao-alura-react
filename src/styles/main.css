@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    -webkit-tap-highlight-color: transparent;
+
     --backgroundBase: #F9F9F9;
     --backgroundLevel1: #FFFFFF;
     --backgroundLevel2: #F0F0F0;

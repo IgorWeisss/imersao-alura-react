@@ -1,26 +1,26 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
 
-interface ChildrenProps {
+export const ThemeContext = createContext({
+  mode: "dark",
+  toggleMode: function () {}
+})
+
+interface ThemeProviderProps {
   children: JSX.Element
   initialMode: string
 }
 
-export const ThemeContext = createContext({
-  mode: "",
-  toggleMode: () => {console.log("AUEHUAHE")}
-})
-
-export function ThemeProvider({children, initialMode}:ChildrenProps) {
+export function ThemeProvider ({children, initialMode}:ThemeProviderProps) {
   
-  const [theme, setTheme] = useState(initialMode)
+  const [mode, setMode] = useState(initialMode)
 
-  const toggleMode = function () {
-    theme === "" ? setTheme('dark') : setTheme('')
+  function toggleMode () {
+    mode === "" ? setMode('dark') : setMode('')
   }
-  
+
   return (
-    <ThemeContext.Provider value={{mode: theme, toggleMode: toggleMode}}>
-        {children}
+    <ThemeContext.Provider value={{mode: mode, toggleMode: toggleMode}}>
+      {children}
     </ThemeContext.Provider>
   )
 }

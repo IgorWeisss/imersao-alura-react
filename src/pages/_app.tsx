@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { ThemeContext, ThemeProvider } from '../providers/ThemeProvider'
 import '../styles/main.css'
 
-function ProviderWrapper (props:any) {
+export function ProviderWrapper (props:any) {  
   return (
     <ThemeProvider initialMode='dark'>
       {props.children}
@@ -12,9 +12,9 @@ function ProviderWrapper (props:any) {
 }
 
 function App({ Component, pageProps }: AppProps) {  
-
-  const context = useContext(ThemeContext)
   
+  const context = useContext(ThemeContext)
+
   return (
       <div className={context.mode}>
         <Component {...pageProps}/>
@@ -22,12 +22,10 @@ function App({ Component, pageProps }: AppProps) {
   )
 }
 
-function _app (props:any) {
+export default function _app (props:any) {
   return (
     <ProviderWrapper>
       <App {...props}/>
     </ProviderWrapper>
   )
 }
-
-export default _app
