@@ -1,7 +1,11 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+
 import { useContext, useEffect } from 'react'
+import { RegisterVideoModal } from '../components/RegisterVideoModal'
+
 import { ThemeContext, ThemeProvider } from '../providers/ThemeProvider'
+
 import '../styles/main.css'
 
 function App({ Component, pageProps }: AppProps) {  
@@ -17,6 +21,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <div id='themeDiv' className={context.mode}>
+        <RegisterVideoModal />
         <Component {...pageProps}/>
       </div>
     </>

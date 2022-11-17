@@ -11,6 +11,8 @@
     --backgroundLevel2: #F0F0F0;
     --borderBase: #E5E5E5;
     --textColorBase: #222222;
+    --textInput: #4b4b4b;
+    --overlay: rgba(0, 0, 0, 0.4);
   }
   
   .dark {
@@ -19,6 +21,8 @@
     --backgroundLevel2: #313131;
     --borderBase: #383838;
     --textColorBase: #FFFFFF;
+    --textInput: #a3a3a3;
+    --overlay: rgba(0, 0, 0, 0.4);
   }
 
   svg path.text {

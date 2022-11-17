@@ -12,6 +12,8 @@ module.exports = {
         backgroundLevel2: "var(--backgroundLevel2)",
         borderBase: "var(--borderBase)",
         textColorBase: "var(--textColorBase)",
+        textInput: "var(--textInput)",
+        overlay: "var(--overlay)",
         themeSwitcherBackground: "#333333",
         themeSwitcherThumb: "#FAFAFA",
       },
