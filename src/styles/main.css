@@ -13,6 +13,7 @@
     --textColorBase: #222222;
     --textInput: #4b4b4b;
     --overlay: rgba(0, 0, 0, 0.4);
+    --videoCardOverlay: rgb(220, 38, 38);
   }
   
   .dark {
@@ -20,9 +21,10 @@
     --backgroundLevel1: #202020;
     --backgroundLevel2: #313131;
     --borderBase: #383838;
-    --textColorBase: #FFFFFF;
+    --textColorBase: #ffffff;
     --textInput: #a3a3a3;
     --overlay: rgba(0, 0, 0, 0.4);
+    --videoCardOverlay: rgb(220, 38, 38);
   }
 
   svg path.text {

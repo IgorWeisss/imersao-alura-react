@@ -7,17 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model playlists {
-  id           String   @id @default(uuid())
-  playlistName String
-  videos       videos[]
-}
-
 model videos {
-  id          String    @id @default(uuid())
-  title       String
-  url         String
-  thumb       String
-  playlistsId String
-  playlists   playlists @relation(fields: [playlistsId], references: [id])
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  title      String
+  url        String
+  thumb      String
+  playlist   String
 }

@@ -6,21 +6,62 @@ import { Timeline } from "../components/TimeLine";
 import { Favorites } from "../components/Favorites";
 
 import config from '../../config.json'
+import { PrismaClient } from "@prisma/client";
 
-export default function Home () {
-
-  useEffect(() => {
-    
-  },[])
+export default function Home ({data}:any) {
   
   const [searchFilter, setSearchFilter] = useState('')
+  const [videos, setVideos] = useState({})
+
+  useEffect(() => {
+    const videosByPlaylist = data.reduce((acc:any, cur:any) => {
+  
+      const { playlist, ...videoProps } = cur
+    
+      const videos = acc[playlist] || []
+      videos.push(videoProps)
+    
+      return (
+        {
+          ...acc,
+          [playlist]: videos
+        }
+      )
+    
+    },[])
+
+    console.log(videosByPlaylist)
+    
+    setVideos(videosByPlaylist)
+
+  },[])
+
 
   return (
     <div className="flex flex-col">
       <Menu setFilter={setSearchFilter}/>
       <Header banner={config.banner} github={config.github} job={config.job} name={config.name}/>
-      <Timeline filter={searchFilter} playlists={config.playlists}/>
+      <Timeline filter={searchFilter} playlists={videos}/>
       <Favorites favorites={config.favorites}/>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const prisma = new PrismaClient
+  const data = await prisma.videos.findMany(
+    {
+      select: {
+        id:true,
+        playlist:true,
+        thumb:true,
+        title:true,
+        url:true
+      }
+    }
+  )
+
+  return {
+    props: {data}
+  }
 }

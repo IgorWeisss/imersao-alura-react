@@ -14,8 +14,12 @@ module.exports = {
         textColorBase: "var(--textColorBase)",
         textInput: "var(--textInput)",
         overlay: "var(--overlay)",
+        videoCardOverlay: "var(--videoCardOverlay)",
         themeSwitcherBackground: "#333333",
         themeSwitcherThumb: "#FAFAFA",
+      },
+      backgroundImage: {
+        'radial-gradient': 'radial-gradient(var(--videoCardOverlay), #7F1D1D)'
       },
       fontFamily: {
         sans: "Helvetica"
