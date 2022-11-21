@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Menu } from "../components/Menu";
 import { Header } from "../components/Header";
@@ -8,6 +8,10 @@ import { Favorites } from "../components/Favorites";
 import config from '../../config.json'
 
 export default function Home () {
+
+  useEffect(() => {
+    
+  },[])
   
   const [searchFilter, setSearchFilter] = useState('')
 
