@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { supabase } from "../../../services/supabaseClient"
 
 interface useFormProps {
   initialValues: {
@@ -51,13 +50,6 @@ export function useForm ({initialValues}:useFormProps) {
 
     submit: () => {
       // ADICIONAR VALIDAÇÃO AQUI
-      supabase
-        .from("videos")
-        .insert(values)
-        .then(res => {
-          console.log(res)          
-        })
-      console.log(values)
     }
   }
 }
