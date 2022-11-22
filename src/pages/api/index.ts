@@ -3,29 +3,29 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
-  const video = req.body
+  // const video = req.body
 
-  const prisma = new PrismaClient
+  // const prisma = new PrismaClient
 
-  try {
+  // try {
     
-    const play = await prisma.videos.create(
-      {
-        data: {
-          playlist: video.playlist,
-          thumb: video.thumb,
-          title: video.title,
-          url: video.url,
-        }
-      }
-    )
+  //   const play = await prisma.videos.create(
+  //     {
+  //       data: {
+  //         playlist: video.playlist,
+  //         thumb: video.thumb,
+  //         title: video.title,
+  //         url: video.url,
+  //       }
+  //     }
+  //   )
     
-    res.json(play)
+  //   res.json(play)
 
-  } catch (error) {
+  // } catch (error) {
    
-    console.log(error)
-    res.json(error)
+  //   console.log(error)
+  //   res.json(error)
 
-  }  
+  // }  
 }
