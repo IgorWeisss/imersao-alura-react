@@ -52,11 +52,11 @@ export async function getServerSideProps() {
   const data = await prisma.videos.findMany(
     {
       select: {
-        id:true,
-        playlist:true,
-        thumb:true,
-        title:true,
-        url:true
+        id: true,
+        playlist: true,
+        thumb: true,
+        title: true,
+        url: true
       }
     }
   )
