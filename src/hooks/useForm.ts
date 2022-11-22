@@ -12,9 +12,9 @@ export function useForm ({initialValues}:useFormProps) {
   const [values, setValues] = useState(initialValues)
 
   const getThumb = (property:string, value:string) => {
-    if (value === '') return ''
     
     if (property === "url") {
+      if (value === '') return ''
       const videoId = value.slice(-11)
       const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
 
@@ -46,10 +46,6 @@ export function useForm ({initialValues}:useFormProps) {
         thumb
       })
       
-    },
-
-    submit: () => {
-      // ADICIONAR VALIDAÇÃO AQUI
     }
   }
 }

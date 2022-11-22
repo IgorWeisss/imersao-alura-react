@@ -1,13 +1,15 @@
-import { useContext } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { ThemeContext } from '../../providers/ThemeProvider';
-import { useForm } from './hooks/useForm';
+import { useForm } from '../../hooks/useForm';
+import axios from 'axios'
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Plus, X } from 'phosphor-react';
 
 
-
 export function RegisterVideoModal () {
+
+  const [open, setOpen] = useState(false)
 
   const context = useContext(ThemeContext)
 
@@ -19,8 +21,24 @@ export function RegisterVideoModal () {
     }
   })
 
+  async function handleCreateVideo (event: FormEvent) {
+
+    event.preventDefault()
+    form.clearFormStates()
+    
+    try {
+      const res = await axios.post('/api/createVideo', form.values)
+      console.log(res.data)      
+    } catch (error) {
+      console.log(error)      
+    }    
+
+    setOpen(false)
+    
+  }
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
           <button className='flex items-center justify-center w-10 h-10 bg-red-600 rounded-full fixed bottom-2 right-2 xl:left-[96.4vw]'>
             <Plus size={16} weight="bold" color='white' />
@@ -40,7 +58,7 @@ export function RegisterVideoModal () {
               <Dialog.Title className='font-bold font-sans mt-4 text-textColorBase'>
                 Cadastrar novo Vídeo
               </Dialog.Title>
-              <form className='flex flex-col gap-2 mt-4 w-full p-4'>
+              <form onSubmit={handleCreateVideo} className='flex flex-col gap-2 mt-4 w-full p-4'>
                 <input 
                   type="text" 
                   placeholder='Título do Vídeo'
@@ -55,27 +73,30 @@ export function RegisterVideoModal () {
                   onInput={form.handleInput}
                   className='bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none'
                 />
-              {
-                form.values.thumb !== '' && (
-                  <div className='flex flex-col w-full'>
-                    <img
-                      src={form.values.thumb}
-                      className='w-full h-auto aspect-video object-cover'
-                      alt="Teste"
-                    />
-                  </div>
-                )
-              }
-                <Dialog.Close onClick={form.clearFormStates} onKeyDown={(e) => {
-                      if(e.key === "Enter") form.submit()
-                    }}>
-                  <div
-                    className='flex items-center justify-center bg-red-600 w-full rounded h-14 text-white'
-                    onClick={form.submit}
-                  >
-                    Salvar
-                  </div>
-                </Dialog.Close>
+                {
+                  form.values.thumb !== '' && (
+                    <div className='flex flex-col w-full'>
+                      <img
+                        src={form.values.thumb}
+                        className='w-full h-auto aspect-video object-cover'
+                        alt="Teste"
+                      />
+                    </div>
+                  )
+                }
+                <input 
+                    type="text"
+                    placeholder='Playlist'
+                    name='playlist'
+                    onInput={form.handleInput}
+                    className='bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none'
+                />
+                <button  
+                  type='submit'
+                  className='flex items-center justify-center bg-red-600 w-full rounded h-14 text-white cursor-pointer'
+                >
+                  Salvar
+                </button>
               </form>
           </Dialog.Content>
         </div>
