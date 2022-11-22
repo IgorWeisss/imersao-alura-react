@@ -34,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   main()
   .then(async () => {
     await prisma.$disconnect()
-    res.send()
   })
   .catch(async (e) => {
     console.error(e)
