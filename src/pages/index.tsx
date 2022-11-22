@@ -30,8 +30,6 @@ export default function Home ({data}:any) {
     
     },[])
 
-    console.log(videosByPlaylist)
-    
     setVideos(videosByPlaylist)
 
   },[])
