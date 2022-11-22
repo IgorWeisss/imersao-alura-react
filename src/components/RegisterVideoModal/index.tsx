@@ -24,16 +24,16 @@ export function RegisterVideoModal () {
   async function handleCreateVideo (event: FormEvent) {
 
     event.preventDefault()
-    form.clearFormStates()
+    setOpen(false)
     
     try {
       const res = await axios.post('/api/createVideo', form.values)
       console.log(res.data)      
+      form.clearFormStates()
     } catch (error) {
       console.log(error)      
     }    
 
-    setOpen(false)
     
   }
 
