@@ -9,10 +9,10 @@ import config from '../../config.json'
 import { PrismaClient } from "@prisma/client";
 import { useSWRGet } from "../hooks/useSWRGet";
 
-export default function Home () {
+export default function Home ({ data }:any) {
   
   const [searchFilter, setSearchFilter] = useState('')
-  // const [videos, setVideos] = useState({})
+  const [videos, setVideos] = useState({})
 
   const organizeVideosByPlaylists = (data:any) => {
     const videosByPlaylist = data.reduce((acc:any, cur:any) => {
@@ -31,13 +31,12 @@ export default function Home () {
     
     },[])
 
-    // setVideos(videosByPlaylist)
+    setVideos(videosByPlaylist)
   }
 
-  const {videos, isError} = useSWRGet('getVideos')
-
-  if (isError) console.log(isError)  
-
+  useEffect(() => {
+    organizeVideosByPlaylists(data)
+  },[])
 
   return (
     <div className="flex flex-col">
@@ -49,22 +48,23 @@ export default function Home () {
   )
 }
 
-// export async function getServerSideProps() {
-//   const prisma = new PrismaClient
-//   const data = await prisma.videos.findMany(
-//     {
-//       select: {
-//         playlist: true,
-//         id: true,
-//         thumb: true,
-//         title: true,
-//         url: true,
-//         created_at: false
-//       }
-//     }
-//   )
+export async function getStaticProps() {
+  const prisma = new PrismaClient
+  const data = await prisma.videos.findMany(
+    {
+      select: {
+        playlist: true,
+        id: true,
+        thumb: true,
+        title: true,
+        url: true,
+        created_at: false
+      }
+    }
+  )
 
-//   return {
-//     props: {data}
-//   }
-// }
+  return {
+    props: {data},
+    revalidate: 10
+  }
+}
