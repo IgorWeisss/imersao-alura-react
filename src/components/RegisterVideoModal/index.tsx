@@ -28,10 +28,7 @@ export function RegisterVideoModal () {
     try {
       const res = await axios.post('/api/createVideo', form.values)
       console.log(res.data)      
-      form.clearFormStates()
-
-      const revalidation = await axios.get('/api/revalidate')
-      console.log(revalidation)      
+      form.clearFormStates()    
 
     } catch (error) {
       console.log(error)      

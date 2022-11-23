@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { VideoCard } from "./components/VideoCard"
 
 interface VideosProps {
@@ -7,21 +8,43 @@ interface VideosProps {
   id: string
 }
 
-interface Playlists {
-  [objKey: string]: VideosProps []
+interface Videos {
+  [objKey:string]: VideosProps[]
 }
 
-interface PlaylistsProps {
-  playlists: Playlists
+interface TimelineProps {
+  data: any
   filter: string
 }
 
-export function Timeline ({ playlists, filter }:PlaylistsProps) {
+export function Timeline ({data, filter}:TimelineProps) {
   
-  function getFilteredVideos () {
+  const [videos, setVideos] = useState<Videos | any>([])
+
+  function organizeVideosByPlaylists (data:any) {
+    const videosByPlaylist = data.reduce((acc:any, cur:any) => {
+  
+      const { playlist, ...videoProps } = cur
+    
+      const videos = acc[playlist] || []
+      videos.push(videoProps)
+    
+      return (
+        {
+          ...acc,
+          [playlist]: videos
+        }
+      )
+    
+    },[])
+
+    setVideos(videosByPlaylist)
+  }
+  
+  function getFilteredVideos (playlists:Videos, filter:string) {
 
     const playlistsArray = Object.keys(playlists)
-    let result = {}
+    let result = {} as Videos
   
     playlistsArray.forEach(playlist => {
       const videos = playlists[playlist]
@@ -42,8 +65,14 @@ export function Timeline ({ playlists, filter }:PlaylistsProps) {
   
     return result
   }
+
+  useEffect(() => {
+    console.log(data);
+    
+    organizeVideosByPlaylists(data)
+  },[])
   
-  const filteredVideos:Playlists = getFilteredVideos()
+  const filteredVideos = getFilteredVideos(videos, filter)
   const playlistsNames = Object.keys(filteredVideos)
   
   return (

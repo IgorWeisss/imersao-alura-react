@@ -8,43 +8,16 @@ import { Favorites } from "../components/Favorites";
 import config from '../../config.json'
 import { PrismaClient } from "@prisma/client";
 import { useSWRGet } from "../hooks/useSWRGet";
-import { stringify } from "querystring";
 
 export default function Home ({ data }:any) {
   
   const [searchFilter, setSearchFilter] = useState('')
-  const [videos, setVideos] = useState({})
-
-  const organizeVideosByPlaylists = (data:any) => {
-    const videosByPlaylist = data.reduce((acc:any, cur:any) => {
-  
-      const { playlist, ...videoProps } = cur
-    
-      const videos = acc[playlist] || []
-      videos.push(videoProps)
-    
-      return (
-        {
-          ...acc,
-          [playlist]: videos
-        }
-      )
-    
-    },[])
-
-    setVideos(videosByPlaylist)
-  }
-
-  useEffect(() => {
-    organizeVideosByPlaylists(data)
-  },[data])
 
   return (
     <div className="flex flex-col">
       <Menu setFilter={setSearchFilter}/>
       <Header banner={config.banner} github={config.github} job={config.job} name={config.name}/>
-      <div>{JSON.stringify(data)}</div>
-      <Timeline filter={searchFilter} playlists={videos}/>
+      <Timeline data={data} filter={searchFilter} />
       <Favorites favorites={config.favorites}/>
     </div>
   )
@@ -52,6 +25,7 @@ export default function Home ({ data }:any) {
 
 export async function getStaticProps() {
   const prisma = new PrismaClient
+  
   const data = await prisma.videos.findMany(
     {
       select: {
@@ -66,7 +40,6 @@ export async function getStaticProps() {
   )
 
   return {
-    props: {data},
-    revalidate: 10
+    props: {data}
   }
 }
