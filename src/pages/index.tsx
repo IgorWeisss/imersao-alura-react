@@ -8,6 +8,7 @@ import { Favorites } from "../components/Favorites";
 import config from '../../config.json'
 import { PrismaClient } from "@prisma/client";
 import { useSWRGet } from "../hooks/useSWRGet";
+import { stringify } from "querystring";
 
 export default function Home ({ data }:any) {
   
@@ -36,7 +37,7 @@ export default function Home ({ data }:any) {
 
   useEffect(() => {
     organizeVideosByPlaylists(data)
-  },[])
+  },[data])
 
   return (
     <div className="flex flex-col">

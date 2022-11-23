@@ -24,7 +24,7 @@
     "environment.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/pages/api/revalidate.js"  ],
   "exclude": [
     "node_modules"
   ]

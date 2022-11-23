@@ -6,7 +6,6 @@ import axios from 'axios'
 import * as Dialog from '@radix-ui/react-dialog';
 import { Plus, X } from 'phosphor-react';
 
-
 export function RegisterVideoModal () {
 
   const [open, setOpen] = useState(false)
@@ -30,6 +29,10 @@ export function RegisterVideoModal () {
       const res = await axios.post('/api/createVideo', form.values)
       console.log(res.data)      
       form.clearFormStates()
+
+      const revalidation = await axios.get('/api/revalidate')
+      console.log(revalidation)      
+
     } catch (error) {
       console.log(error)      
     }    
