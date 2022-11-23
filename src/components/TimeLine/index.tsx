@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { VideoCard } from "./components/VideoCard"
 
 interface VideosProps {
@@ -19,8 +19,6 @@ interface TimelineProps {
 
 export function Timeline ({data, filter}:TimelineProps) {
   
-  const [videos, setVideos] = useState<Videos | any>([])
-
   function organizeVideosByPlaylists (data:any) {
     const videosByPlaylist = data.reduce((acc:any, cur:any) => {
   
@@ -38,7 +36,7 @@ export function Timeline ({data, filter}:TimelineProps) {
     
     },[])
 
-    setVideos(videosByPlaylist)
+    return videosByPlaylist
   }
   
   function getFilteredVideos (playlists:Videos, filter:string) {
@@ -68,10 +66,10 @@ export function Timeline ({data, filter}:TimelineProps) {
 
   useEffect(() => {
     console.log(data);
-    
-    organizeVideosByPlaylists(data)
+
   },[])
   
+  const videos = organizeVideosByPlaylists(data)
   const filteredVideos = getFilteredVideos(videos, filter)
   const playlistsNames = Object.keys(filteredVideos)
   
