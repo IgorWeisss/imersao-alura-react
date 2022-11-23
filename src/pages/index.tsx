@@ -43,6 +43,7 @@ export default function Home ({ data }:any) {
     <div className="flex flex-col">
       <Menu setFilter={setSearchFilter}/>
       <Header banner={config.banner} github={config.github} job={config.job} name={config.name}/>
+      <div>{JSON.stringify(data)}</div>
       <Timeline filter={searchFilter} playlists={videos}/>
       <Favorites favorites={config.favorites}/>
     </div>
