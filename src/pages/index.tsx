@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Menu } from "../components/Menu";
 import { Header } from "../components/Header";
-import { Timeline } from "../components/TimeLine";
+import { organizeVideosByPlaylists, Timeline } from "../components/TimeLine";
 import { Favorites } from "../components/Favorites";
 
 import config from '../../config.json'
 import { PrismaClient } from "@prisma/client";
-import { useSWRGet } from "../hooks/useSWRGet";
+import { useSWRGetVideos } from "../hooks/useSWRGet";
 
 export default function Home ({ data }:any) {
   
@@ -38,6 +38,8 @@ export async function getStaticProps() {
       }
     }
   )
+
+  await prisma.$disconnect()
 
   return {
     props: {data}

@@ -5,7 +5,6 @@ const prisma = new PrismaClient
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-  async function main() {
     try {
     
       const data = await prisma.videos.findMany(
@@ -20,24 +19,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         }
       )
-      
+    
       res.json(data)
-        
+      await prisma.$disconnect()
+
     } catch (error) {
      
       console.log(error)
       res.json(error)
-  
+      await prisma.$disconnect()
+
     }
-  }
-
-  main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-  })
-
 }

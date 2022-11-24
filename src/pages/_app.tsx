@@ -16,6 +16,7 @@ function App({ Component, pageProps }: AppProps) {
     const themeDiv = document.querySelector('#themeDiv') || document.body
     const color = getComputedStyle(themeDiv).getPropertyValue('--backgroundBase')
     document.querySelector('#themeTag')?.setAttribute('content', color)
+    document.documentElement.setAttribute('style', `background-color: ${color};`)
   },[context.mode])
   
   return (

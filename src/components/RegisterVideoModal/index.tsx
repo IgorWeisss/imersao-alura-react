@@ -17,6 +17,7 @@ export function RegisterVideoModal () {
       title: '',
       url: '',
       thumb: '',
+      playlist: ''
     }
   })
 
@@ -26,6 +27,11 @@ export function RegisterVideoModal () {
     setOpen(false)
     
     try {
+      const playlist = (form.values.playlist)
+      const newVideo = {
+        ...form.values,
+        playlist
+      }
       const res = await axios.post('/api/createVideo', form.values)
       console.log(res.data)      
       form.clearFormStates()    

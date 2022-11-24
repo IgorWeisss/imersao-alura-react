@@ -8,7 +8,7 @@ export interface SearchFilterProps {
 
 export function Menu ({ setFilter }:SearchFilterProps) {
   return (
-    <div className="flex w-full h-14 px-4 fixed bg-backgroundLevel1 items-center justify-between gap-2">
+    <div className="flex w-full h-14 px-4 fixed bg-backgroundLevel1 items-center justify-between gap-2 z-50">
       <Logo />
       <Search setFilter={setFilter}/>
       <DarkModeSwitch />

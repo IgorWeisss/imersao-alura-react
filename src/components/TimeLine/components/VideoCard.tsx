@@ -8,7 +8,7 @@ export function VideoCard({ thumb, title, url }: VideoCardProps) {
   return (
     <li className="group">
       <a href={url} target="blank">
-        <div className="w-full h-auto aspect-video relative transition-all group-hover:scale-110 group-hover:z-50 rounded bg-transparent group-hover:bg-radial-gradient">
+        <div className="w-full h-auto aspect-video relative transition-all group-hover:scale-110 group-hover:z-20 rounded bg-transparent group-hover:bg-radial-gradient">
           <div className="flex absolute w-full h-full rounded">
 
           </div>

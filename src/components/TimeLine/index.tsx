@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { useSWRGetVideos } from "../../hooks/useSWRGet"
 import { VideoCard } from "./components/VideoCard"
 
 interface VideosProps {
@@ -17,59 +18,55 @@ interface TimelineProps {
   filter: string
 }
 
-export function Timeline ({data, filter}:TimelineProps) {
-  
-  function organizeVideosByPlaylists (data:any) {
-    const videosByPlaylist = data.reduce((acc:any, cur:any) => {
-  
-      const { playlist, ...videoProps } = cur
-    
-      const videos = acc[playlist] || []
-      videos.push(videoProps)
-    
-      return (
-        {
-          ...acc,
-          [playlist]: videos
-        }
-      )
-    
-    },[])
+export function organizeVideosByPlaylists (data:any) {
+  const videosByPlaylist = data.reduce((acc:any, cur:any) => {
 
-    return videosByPlaylist
-  }
+    const { playlist, ...videoProps } = cur
   
-  function getFilteredVideos (playlists:Videos, filter:string) {
-
-    const playlistsArray = Object.keys(playlists)
-    let result = {} as Videos
+    const videos = acc[playlist] || []
+    videos.push(videoProps)
   
-    playlistsArray.forEach(playlist => {
-      const videos = playlists[playlist]
-      const filtered = videos
-        .filter(video => {
-          const filterNormalized = filter.toLowerCase()
-          const titleNormalized = video.title.toLowerCase()
-          return titleNormalized.includes(filterNormalized)
-        })
-      
-      if ( filtered.length > 0 ) {
-        result = {
-          ...result,
-          [playlist]: filtered
-        }
+    return (
+      {
+        ...acc,
+        [playlist]: videos
       }
-    })
+    )
   
-    return result
-  }
-
-  useEffect(() => {
-    console.log(data);
-
   },[])
+
+  return videosByPlaylist
+}
+
+function getFilteredVideos (playlists:Videos, filter:string) {
+
+  const playlistsArray = Object.keys(playlists)
+  let result = {} as Videos
+
+  playlistsArray.forEach(playlist => {
+    const videos = playlists[playlist]
+    const filtered = videos
+      .filter(video => {
+        const filterNormalized = filter.toLowerCase()
+        const titleNormalized = video.title.toLowerCase()
+        return titleNormalized.includes(filterNormalized)
+      })
+    
+    if ( filtered.length > 0 ) {
+      result = {
+        ...result,
+        [playlist]: filtered
+      }
+    }
+  })
+
+  return result
+}
+
+export function Timeline ({data, filter}:TimelineProps) {
+
+  const {videos, isError} = useSWRGetVideos(data)
   
-  const videos = organizeVideosByPlaylists(data)
   const filteredVideos = getFilteredVideos(videos, filter)
   const playlistsNames = Object.keys(filteredVideos)
   

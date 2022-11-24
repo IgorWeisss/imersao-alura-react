@@ -5,6 +5,7 @@ interface useFormProps {
     title: string
     url:string
     thumb: string
+    playlist: string
   }
 }
 
