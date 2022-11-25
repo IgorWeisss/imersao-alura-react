@@ -42,6 +42,9 @@ export async function getStaticProps() {
   await prisma.$disconnect()
 
   return {
-    props: {data}
+    props: {
+      data
+    },
+    revalidate: 1
   }
 }
