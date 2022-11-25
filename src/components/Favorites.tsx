@@ -20,7 +20,7 @@ export function Favorites ({ favorites }:FavoritesProps) {
                   <img
                     src={fav.avatar}
                     alt={`Canal ${fav.name}`}
-                    className="rounded-full w-14 md:w-[5rem]"
+                    className="rounded-full w-14 md:w-[5rem] transition-all hover:scale-110 hover:ring-2 ring-videoCardOverlay"
                   />
                   <p className="text-textColorBase">
                     {fav.name}

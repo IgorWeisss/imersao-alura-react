@@ -2,12 +2,11 @@ import { useState } from "react";
 
 import { Menu } from "../components/Menu";
 import { Header } from "../components/Header";
-import { organizeVideosByPlaylists, Timeline } from "../components/TimeLine";
+import { Timeline } from "../components/TimeLine";
 import { Favorites } from "../components/Favorites";
 
 import config from '../../config.json'
 import { PrismaClient } from "@prisma/client";
-import { useSWRGetVideos } from "../hooks/useSWRGet";
 
 export default function Home ({ data }:any) {
   

@@ -15,10 +15,6 @@
     --overlay: rgba(0, 0, 0, 0.4);
     --videoCardOverlay: rgb(220, 38, 38);
   }
-
-  html {
-    background-color: var(--backgroundBase);
-  }
   
   .dark {
     --backgroundBase: #181818;

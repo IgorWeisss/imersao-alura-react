@@ -18,7 +18,7 @@ export function Header ({ banner, github, name, job }:HeaderProps) {
         <div>
           <a href={`https://github.com/${github}`} target="blank">
             <img
-              className='rounded-full w-14 md:w-[5rem]'
+              className='rounded-full w-14 md:w-[5rem] ring-videoCardOverlay transition-all hover:ring-2 hover:scale-110'
               src={`https://github.com/${github}.png`}
               alt="Foto de perfil"
             />
