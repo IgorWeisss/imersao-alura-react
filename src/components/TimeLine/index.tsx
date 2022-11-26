@@ -64,7 +64,7 @@ function getFilteredVideos (playlists:Videos, filter:string) {
 
 export function Timeline ({data, filter}:TimelineProps) {
 
-  const {videos, isError} = useSWRGetVideos(data)
+  const {videos} = useSWRGetVideos(data)
   
   if (videos) {
     const filteredVideos = getFilteredVideos(videos, filter)

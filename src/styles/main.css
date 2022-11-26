@@ -15,6 +15,27 @@
     --overlay: rgba(0, 0, 0, 0.4);
     --videoCardOverlay: rgb(220, 38, 38);
   }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--textColorBase);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--textInput);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
   
   .dark {
     --backgroundBase: #181818;

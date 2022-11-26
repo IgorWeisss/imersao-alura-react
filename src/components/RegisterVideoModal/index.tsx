@@ -46,7 +46,7 @@ export function RegisterVideoModal () {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Trigger asChild>
-          <button className='flex items-center justify-center w-10 h-10 bg-red-600 rounded-full fixed bottom-2 right-2 xl:left-[96.4vw] z-50'>
+          <button className='flex items-center justify-center w-10 h-10 bg-red-600 rounded-full fixed bottom-2 right-2 xl:left-[calc(100vw_-_4rem)] z-50'>
             <Plus size={16} weight="bold" color='white' />
           </button>
         </Dialog.Trigger>

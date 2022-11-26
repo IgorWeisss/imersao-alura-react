@@ -14,7 +14,7 @@ export default function Home ({ data }:any) {
 
   return (
     <div className="flex flex-col">
-      <Menu setFilter={setSearchFilter}/>
+      <Menu setFilter={setSearchFilter} filter={searchFilter}/>
       <Header banner={config.banner} github={config.github} job={config.job} name={config.name}/>
       <Timeline data={data} filter={searchFilter} />
       <Favorites favorites={config.favorites}/>
