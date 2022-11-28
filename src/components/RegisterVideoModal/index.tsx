@@ -27,12 +27,12 @@ export function RegisterVideoModal () {
     setOpen(false)
     
     try {
-      const playlist = (form.values.playlist)
+      const { playlist, ...videoProps } = (form.values)
       const newVideo = {
-        ...form.values,
-        playlist
+        ...videoProps,
+        playlist: playlist.toLowerCase()
       }
-      const res = await axios.post('/api/createVideo', form.values)
+      const res = await axios.post('/api/createVideo', newVideo)
       console.log(res.data)      
       form.clearFormStates()    
 
