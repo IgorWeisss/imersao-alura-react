@@ -23,18 +23,18 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: var(--textColorBase);
+  background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--textInput);
+  background: #4b4b4b;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #8a8a8a;
 }
   
   .dark {
