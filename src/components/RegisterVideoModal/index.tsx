@@ -2,9 +2,17 @@ import { FormEvent, useContext, useState } from 'react';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import { useForm } from '../../hooks/useForm';
 import axios from 'axios'
+import { z } from 'zod'
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { Plus, X } from 'phosphor-react';
+
+interface NewVideoProps {
+  title:string,
+  url:string,
+  thumb:string,
+  playlist:string
+}
 
 export function RegisterVideoModal () {
 
@@ -21,25 +29,41 @@ export function RegisterVideoModal () {
     }
   })
 
-  async function handleCreateVideo (event: FormEvent) {
-
-    event.preventDefault()
+  async function submitVideoToDatabase (data:NewVideoProps) {
     setOpen(false)
     
-    try {
-      const { playlist, ...videoProps } = (form.values)
-      const newVideo = {
-        ...videoProps,
-        playlist: playlist.toLowerCase()
+      try {
+        const { playlist, ...videoProps } = (data)
+        const newVideo = {
+          ...videoProps,
+          playlist: playlist.toLowerCase()
+        }
+        const res = await axios.post('/api/createVideo', newVideo)
+        console.log(res.data)      
+        form.clearFormStates() 
+      } catch (error) {
+        console.log(error)      
       }
-      const res = await axios.post('/api/createVideo', newVideo)
-      console.log(res.data)      
-      form.clearFormStates()    
+  }
 
-    } catch (error) {
-      console.log(error)      
-    }    
+  async function validateForm (event: FormEvent) {
 
+    event.preventDefault()
+
+    const submitVideoSchema = z.object({
+      title: z.string().min(1, {message: "O tíulo do vídeo é obrigatório"}),
+      url: z.string().min(1, {message: "A URL do vídeo é obrigatória"}).url({message: "A URL fornecida não é válida"}),
+      thumb: z.string(),
+      playlist: z.string().min(1, {message: "A playlist do vídeo é obrigatória"})
+    })
+
+    try {
+      const success = submitVideoSchema.parse(form.values)
+      submitVideoToDatabase(success)
+    } catch (error:any) {
+      const {fieldErrors: err} = error.flatten()
+      form.setErrors(err)
+    }
     
   }
 
@@ -64,21 +88,43 @@ export function RegisterVideoModal () {
               <Dialog.Title className='font-bold font-sans mt-4 text-textColorBase'>
                 Cadastrar novo Vídeo
               </Dialog.Title>
-              <form onSubmit={handleCreateVideo} className='flex flex-col gap-2 mt-4 w-full p-4'>
+              <form onSubmit={validateForm} className='flex flex-col gap-2 mt-4 w-full p-4'>
                 <input 
                   type="text" 
                   placeholder='Título do Vídeo'
                   name='title'
                   onInput={form.handleInput}
-                  className='bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none'
+                  className={`bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none ${form.errors.title ? 'ring-2 ring-red-500' : null}`}
                 />
+                {
+                  form.errors.title
+                    ? (
+                      <p
+                        className='text-red-600 ml-2'
+                      >
+                        {form.errors.title[0]}
+                      </p>
+                    )
+                    : null
+                }
                 <input 
                   type="text"
                   placeholder='URL do Vídeo'
                   name='url'
                   onInput={form.handleInput}
-                  className='bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none'
+                  className={`bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none ${form.errors.url ? 'ring-2 ring-red-500' : null}`}
                 />
+                {
+                  form.errors.url
+                    ? (
+                      <p
+                        className='text-red-600 ml-2'
+                      >
+                        {form.errors.url[0]}
+                      </p>
+                    )
+                    : null
+                }
                 {
                   form.values.thumb !== '' && (
                     <div className='flex flex-col w-full'>
@@ -95,8 +141,19 @@ export function RegisterVideoModal () {
                     placeholder='Playlist'
                     name='playlist'
                     onInput={form.handleInput}
-                    className='bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none'
+                    className={`bg-backgroundBase px-4 py-2 text-textInput placeholder:text-gray-500 rounded focus:ring-2 focus:ring-borderBase outline-none ${form.errors.playlist ? 'ring-2 ring-red-500' : null}`}
                 />
+                {
+                  form.errors.playlist
+                    ? (
+                      <p
+                        className='text-red-600 ml-2'
+                      >
+                        {form.errors.playlist[0]}
+                      </p>
+                    )
+                    : null
+                }
                 <button  
                   type='submit'
                   className='flex items-center justify-center bg-red-600 w-full rounded h-14 text-white cursor-pointer'

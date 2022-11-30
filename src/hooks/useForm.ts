@@ -9,8 +9,15 @@ interface useFormProps {
   }
 }
 
+interface FormErrors {
+  title?: string[]
+  url?: string[]
+  playlist?: string[]
+}
+
 export function useForm ({initialValues}:useFormProps) {
   const [values, setValues] = useState(initialValues)
+  const [errors, setErrors] = useState<FormErrors>({})
 
   const getThumb = (property:string, value:string) => {
     
@@ -30,9 +37,15 @@ export function useForm ({initialValues}:useFormProps) {
 
   return {
     values,
+    errors: errors,
+
+    setErrors: (err:FormErrors) => {
+      setErrors(err)
+    },
 
     clearFormStates: () => {
       setValues(initialValues)
+      setErrors({})
     },
 
     handleInput: (e:any) => {
