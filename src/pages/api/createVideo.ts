@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "../../utils/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
   const video = req.body
-
-  const prisma = new PrismaClient
 
   try {
     

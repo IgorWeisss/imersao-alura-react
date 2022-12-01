@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import { Menu } from "../components/Menu";
-import { Header } from "../components/Header";
+import { Header } from "../components/Header/Header";
 import { Timeline } from "../components/TimeLine";
 import { Favorites } from "../components/Favorites";
 
 import config from '../../config.json'
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../utils/prisma";
 
 export default function Home ({ data }:any) {
   
@@ -23,7 +23,6 @@ export default function Home ({ data }:any) {
 }
 
 export async function getStaticProps() {
-  const prisma = new PrismaClient
   
   const data = await prisma.videos.findMany(
     {

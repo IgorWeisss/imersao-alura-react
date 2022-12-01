@@ -5,7 +5,7 @@ import axios from 'axios'
 import { z } from 'zod'
 
 import * as Dialog from '@radix-ui/react-dialog';
-import { Plus, X } from 'phosphor-react';
+import { CircleNotch, Plus, X } from 'phosphor-react';
 
 interface NewVideoProps {
   title:string,
@@ -17,7 +17,7 @@ interface NewVideoProps {
 export function RegisterVideoModal () {
 
   const [open, setOpen] = useState(false)
-
+  const [isLoading, setIsLoading] = useState(false)
   const context = useContext(ThemeContext)
 
   const form = useForm({
@@ -29,9 +29,8 @@ export function RegisterVideoModal () {
     }
   })
 
-  async function submitVideoToDatabase (data:NewVideoProps) {
-    setOpen(false)
-    
+  async function submitVideoToDatabase (data:NewVideoProps) {    
+    setIsLoading(true)
       try {
         const { playlist, ...videoProps } = (data)
         const newVideo = {
@@ -40,6 +39,8 @@ export function RegisterVideoModal () {
         }
         const res = await axios.post('/api/createVideo', newVideo)
         console.log(res.data)      
+        setOpen(false)
+        setIsLoading(false)
         form.clearFormStates() 
       } catch (error) {
         console.log(error)      
@@ -158,7 +159,9 @@ export function RegisterVideoModal () {
                   type='submit'
                   className='flex items-center justify-center bg-red-600 w-full rounded h-14 text-white cursor-pointer'
                 >
-                  Salvar
+                  {
+                    isLoading ? <CircleNotch className='animate-spin' weight='bold' size={32} /> : 'Salvar'
+                  }
                 </button>
               </form>
           </Dialog.Content>
