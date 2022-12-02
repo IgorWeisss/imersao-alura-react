@@ -14,28 +14,36 @@
     --textInput: #4b4b4b;
     --overlay: rgba(0, 0, 0, 0.4);
     --videoCardOverlay: rgb(220, 38, 38);
+
+    /* Toastify Overriden styles */
+    --toastify-color-dark: var(--backgroundLevel2);
+    --toastify-text-color-dark: var(var(--textColorBase));
+    --toastify-color-progress-dark: var(--videoCardOverlay);
+
   }
 
-  /* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
+  /* scroll width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+  /* Scroll Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #4b4b4b;
-  border-radius: 10px;
-}
+  /* Scroll Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #4b4b4b;
+    border-radius: 10px;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #8a8a8a;
-}
+  /* Scroll Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8a8a8a;
+  }
+
+  
   
   .dark {
     --backgroundBase: #181818;
@@ -46,6 +54,7 @@
     --textInput: #a3a3a3;
     --overlay: rgba(0, 0, 0, 0.4);
     --videoCardOverlay: rgb(220, 38, 38);
+
   }
 
   svg path.text {

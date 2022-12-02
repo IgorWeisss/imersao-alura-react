@@ -6,6 +6,7 @@ import { z } from 'zod'
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { CircleNotch, Plus, X } from 'phosphor-react';
+import { toast } from 'react-toastify';
 
 interface NewVideoProps {
   title:string,
@@ -41,6 +42,7 @@ export function RegisterVideoModal () {
         console.log(res.data)      
         setOpen(false)
         setIsLoading(false)
+        toast.success('Vídeo cadastrado com sucesso!')
         form.clearFormStates() 
       } catch (error) {
         console.log(error)      
