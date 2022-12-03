@@ -15,3 +15,20 @@ model videos {
   thumb      String
   playlist   String
 }
+
+model users {
+  id         String      @id @default(uuid())
+  created_at DateTime    @default(now())
+  name       String
+  github     String
+  job        String
+  banner     String
+  favorites  favorites[]
+}
+
+model favorites {
+  id      String  @id @default(uuid())
+  name    String
+  users   users?  @relation(fields: [usersId], references: [id])
+  usersId String?
+}
