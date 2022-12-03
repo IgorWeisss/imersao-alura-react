@@ -3,22 +3,22 @@ import { prisma } from "../../lib/prisma";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   
-  const user = req.body
+  const favorite = req.body
 
   try {
     
-    const newUser = await prisma.users.create(
+    const newFavorite = await prisma.favorites.create(
       {
         data: {
-          banner: user.banner,
-          github: user.github,
-          job: user.job,
-          name: user.name
+          name: favorite.name,
+          avatar: favorite.avatar,
+          url: favorite.url,
+          userId: favorite.userId
         }
       }
     )
     
-    res.json(newUser)
+    res.json(newFavorite)
 
   } catch (error) {
    

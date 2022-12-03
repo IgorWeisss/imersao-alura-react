@@ -5,15 +5,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
     
-      const data = await prisma.videos.findMany(
+      const data = await prisma.favorites.findMany(
         {
-          select: {
-            playlist: true,
-            id: true,
-            thumb: true,
-            title: true,
-            url: true,
-            created_at: false
+          where: {
+            userId: "9c956367-559b-4f7f-9c24-3076fa9f7813"
           }
         }
       )
