@@ -91,6 +91,7 @@ export function Timeline ({data, filter}:TimelineProps) {
                       title={video.title} 
                       url={video.url} 
                       key={video.id}
+                      videoId={video.id}
                     />
                   )
                 })}
